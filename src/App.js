@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { Redirect, Router } from "@reach/router";
+import NotFound from "./views/NotFound";
+import Author from "./views/Author";
+import Authors from "./views/Authors";
+import NewAuthor from "./views/NewAuthor";
+import EditAuthor from "./views/EditAuthor";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: "center", width: "80%", margin: "0 auto" }}>
+
+      <Router>
+
+        <Author path="/authors/:id" />
+        <Authors path="/authors" />
+        <EditAuthor path="/authors/:id/edit" />
+        <NewAuthor path="/authors/new" />
+        <Redirect from="/" to="/authors" noThrow="true" />
+        {/* If no routes are matched, render this */}
+        <NotFound default path="/notfound" />
+      </Router>
     </div>
   );
 }
